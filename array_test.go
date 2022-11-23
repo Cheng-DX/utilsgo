@@ -23,3 +23,10 @@ func TestSome(t *testing.T) {
 		t.Errorf("Some should return true")
 	}
 }
+
+func TestJoin(t *testing.T) {
+	r := Join(collection, ",")
+	if r != "1,2,3,4" {
+		t.Errorf("Join should return '1,2,3,4'")
+	}
+}

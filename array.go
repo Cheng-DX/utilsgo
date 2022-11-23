@@ -1,5 +1,7 @@
 package utilsgo
 
+import "fmt"
+
 func At[T any](collection []T, index int) (T, bool) {
 	if index < 0 || index >= len(collection) {
 		var r T
@@ -108,6 +110,17 @@ func Slice[T any](collection []T, startIndex int, endIndex int) []T {
 	for index, item := range collection {
 		if startIndex <= index && endIndex > index {
 			result = append(result, item)
+		}
+	}
+	return result
+}
+
+func Join[T any](collection []T, seperator string) string {
+	result := ""
+	for index, item := range collection {
+		result += fmt.Sprintf("%v", item)
+		if index < len(collection)-1 {
+			result += seperator
 		}
 	}
 	return result
