@@ -1,6 +1,8 @@
 package utilsgo
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func At[T any](collection []T, index int) (T, bool) {
 	if index < 0 || index >= len(collection) {
@@ -106,13 +108,20 @@ func ForEach[T any](collection []T, handler func(item T, index int)) {
 }
 
 func Slice[T any](collection []T, startIndex int, endIndex int) []T {
-	result := []T{}
-	for index, item := range collection {
-		if startIndex <= index && endIndex > index {
-			result = append(result, item)
-		}
+	length := len(collection)
+	if startIndex < -length || startIndex > length {
+		return []T{}
 	}
-	return result
+	if endIndex < 0 {
+		endIndex += length
+	}
+	if startIndex < 0 {
+		startIndex += length
+	}
+	if endIndex > len(collection) {
+		endIndex = len(collection)
+	}
+	return collection[startIndex:endIndex]
 }
 
 func Join[T any](collection []T, seperator string) string {
@@ -122,6 +131,50 @@ func Join[T any](collection []T, seperator string) string {
 		if index < len(collection)-1 {
 			result += seperator
 		}
+	}
+	return result
+}
+
+func Includes[T comparable](collection []T, target T) bool {
+	for _, item := range collection {
+		if item == target {
+			return true
+		}
+	}
+	return false
+}
+
+func Pop[T any](collection []T) ([]T, T) {
+	length := len(collection)
+	if length == 0 {
+		var t T
+		return collection, t
+	}
+	return collection[:length-1], collection[length-1]
+}
+
+func Push[T any](collection []T, item T) []T {
+	return append(collection, item)
+}
+
+func Shift[T any](collection []T) ([]T, T) {
+	length := len(collection)
+	if length == 0 {
+		var t T
+		return collection, t
+	}
+	return collection[1:], collection[0]
+}
+
+func Reverse[T any](collection []T) []T {
+	length := len(collection)
+	if length == 0 || length == 1 {
+		return collection
+	}
+	result := []T{}
+
+	for i := length - 1; i >= 0; i-- {
+		result = append(result, collection[i])
 	}
 	return result
 }
