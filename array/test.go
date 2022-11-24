@@ -1,4 +1,4 @@
-package utilsgo
+package array
 
 import (
 	"fmt"

@@ -1,7 +1,9 @@
-package utilsgo
+package array
 
 import (
 	"fmt"
+
+	types "github.com/Cheng-DX/utilsgo/types"
 )
 
 func At[T any](collection []T, index int) (T, bool) {
@@ -13,9 +15,9 @@ func At[T any](collection []T, index int) (T, bool) {
 	return collection[index], true
 }
 
-func Entries[T any](collection []T) []Tuple_2[int, T] {
-	return Map(collection, func(item T, index int) Tuple_2[int, T] {
-		return Tuple_2[int, T]{
+func Entries[T any](collection []T) []types.Tuple_2[int, T] {
+	return Map(collection, func(item T, index int) types.Tuple_2[int, T] {
+		return types.Tuple_2[int, T]{
 			One: index,
 			Two: item,
 		}
