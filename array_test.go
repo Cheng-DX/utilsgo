@@ -9,7 +9,7 @@ var collection = []int{1, 2, 3, 4}
 
 func TestEvery(t *testing.T) {
 	r := Every(collection, func(item int) bool {
-		return item < 0
+		return item > 0
 	})
 	if !r {
 		t.Errorf("Every should return true")
