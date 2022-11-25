@@ -1,4 +1,4 @@
-package types
+package utilsgo
 
 type Entry[K comparable, V any] struct {
 	Key   K
